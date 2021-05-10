@@ -1,0 +1,117 @@
+#include<iostream>
+#include<string>
+#include<string>
+using namespace std;
+class NhanVien
+{
+protected:
+    string HoTen;
+    string NgaySinh;
+    float LuongCoBan;
+    float Luong;
+public:
+    void Nhap()
+    {
+        cout << "Ho ten: ";
+        getline(cin, HoTen);
+        cout << "Ngay sinh: ";
+        getline(cin, NgaySinh);
+        cout << "Luong co ban: ";
+        cin >> LuongCoBan;
+        cout << "Luong: ";
+        cin >> Luong;
+    }
+    void Xuat()
+    {
+        cout << HoTen << "\t" << NgaySinh << "\t" << LuongCoBan << "\t" << Luong;
+    }
+
+};
+class VanPhong : public NhanVien
+{
+protected:
+    int NgayLamViec;
+    float TroCap;
+public:
+    void Nhap()
+    {
+        NhanVien::Nhap();
+        cout << "So ngay lam viec: ";
+        cin >> NgayLamViec;
+        cout << "Tro cap: ";
+        cin >> TroCap;
+    }
+    void Xuat()
+    {
+        NhanVien::Xuat();
+        cout << "\t" << NgayLamViec << "\t" << TroCap;
+    }
+    float TinhLuong()
+    {
+        Luong = LuongCoBan + NgayLamViec * 100000 + TroCap;
+        return Luong;
+    }
+};
+class SanXuat : public NhanVien
+{
+private:
+    int SoSanPham;
+public:
+    void Nhap()
+    {
+        NhanVien::Nhap();
+        cout << "So san pham: ";
+        cin >> SoSanPham;
+    }
+    void Xuat()
+    {
+        NhanVien::Xuat();
+        cout << "\t" << SoSanPham;
+    }
+    float TinhLuong()
+    {
+        Luong = LuongCoBan + SoSanPham * 2000;
+        return Luong;
+    }
+};
+class QuanLy : public NhanVien
+{
+protected:
+    float HeSo;
+    float Thuong;
+public:
+    void Nhap()
+    {
+        NhanVien::Nhap();
+        cout << "He so: ";
+        cin >> HeSo;
+        cout << "Thuong: ";
+        cin >> Thuong;
+    }
+    void Xuat()
+    {
+        NhanVien::Xuat();
+        cout << "\t" << HeSo << "\t" << Thuong;
+    }
+    float TinhLuong()
+    {
+        Luong = LuongCoBan * HeSo + Thuong;
+        return Luong;
+    }
+};
+int main()
+{
+    NhanVien nv;
+    VanPhong vp;
+    vp.Nhap();
+    vp.Xuat();
+    SanXuat sx;
+    sx.Nhap();
+    sx.Xuat();
+    QuanLy qly;
+    qly.Nhap();
+    qly.Xuat();
+    float luong = qly.TinhLuong();
+    cout << "\n" <<luong;
+    return 0;
+}
